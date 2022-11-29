@@ -27,7 +27,7 @@ public class Main {
         }
         if (word[2].matches("[a-z-A-Z]+")) {
             b = romanToArabic(word[2]);
-            romanNum = true h;
+            romanNum = true;
         } else {
             b = Integer.parseInt(word[2]);
         }
