@@ -7,9 +7,12 @@ public class Main {
     public static void main(String[] args)  throws IOException{
         //System.out.println(Calc("IV * II"));
         Scanner scanner = new Scanner(System.in, "UTF-8");
-        while (true){
+        boolean work = true;
+        while (work){
             String input =  scanner.nextLine();
-            System.out.println(Calc(input));
+            if (input.equals("exit"))  work = false;
+            else System.out.println(Calc(input));
+
         }
 
     }
@@ -32,9 +35,11 @@ public class Main {
             b = Integer.parseInt(word[2]);
         }
 
+        // +                                -
+        if ((a < 0 || a > 10 ) || (b < 0 || b > 10)){
 
-        if ((a < 0 || a > 10) && (b < 0 || b > 10)){
-            throw new IOException();
+            throw new IOException("Больше 10 нелзя!!!");
+
         }
         String iterator = String.valueOf(input.charAt(2));
         int result = 0;
