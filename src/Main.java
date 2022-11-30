@@ -17,28 +17,32 @@ public class Main {
 
     }
     public static String Calc(String input) throws IOException {
-        boolean romanNum = false;
+        boolean romanNum1 = false;
+        boolean romanNum2 = false;
         int a = 0;
         int b = 0;
         String[] word = input.split(" ");
         //Пробуем перевести римские в арабские, для расчета
         if (word[0].matches("[a-zA-Z]+")) {
             a = romanToArabic(word[0]);
-            romanNum = true;
+            romanNum1 = true;
         } else {
             a =  Integer.parseInt(word[0]);
         }
         if (word[2].matches("[a-z-A-Z]+")) {
             b = romanToArabic(word[2]);
-            romanNum = true;
+            romanNum2 = true;
         } else {
             b = Integer.parseInt(word[2]);
         }
-
+        //Если одино цифра арабский а другой римский то выбрасываем исключение
+        if ((!romanNum1 && romanNum2) || (romanNum1 && !romanNum2)) {
+            throw  new IOException("Все значение должны быть одного типа.");
+        }
         // +                                -
         if ((a < 0 || a > 10 ) || (b < 0 || b > 10)){
 
-            throw new IOException("Больше 10 нелзя!!!");
+            throw new IOException("Больше 10 нельзя !!!");
 
         }
         String iterator = String.valueOf(input.charAt(2));
@@ -58,12 +62,12 @@ public class Main {
                 try {
                     result = a / b;
                 } catch (ArithmeticException e){
-                    System.out.println("Делить на 0 нельзя");
+                    System.out.println("Деление на ноль");
                 }
                 break;
         }
         input = String.valueOf(result);
-        input = romanNum ? arabicToRoman(result) : input;
+        input = romanNum1 && romanNum2 ? arabicToRoman(result) : input;
         return input;
     }
 
