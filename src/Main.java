@@ -38,7 +38,7 @@ public class Main {
         }
         String iterator = String.valueOf(input.charAt(2));
         int result = 0;
-
+        //проверям оператора
         switch (word[1]){
             case "+":
                 result = a + b;
