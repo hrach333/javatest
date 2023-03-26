@@ -11,12 +11,12 @@ public class Main {
         while (work){
             String input =  scanner.nextLine();
             if (input.equals("exit"))  work = false;
-            else System.out.println(Calc(input));
+            else System.out.println(сalc(input));
 
         }
 
     }
-    public static String Calc(String input) throws IOException {
+    public static String сalc(String input) throws IOException {
         boolean romanNum1 = false;
         boolean romanNum2 = false;
         int a = 0;
