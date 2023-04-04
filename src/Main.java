@@ -22,19 +22,21 @@ public class Main {
         int a = 0;
         int b = 0;
         String[] word = input.split(" ");
+        if (word.length > 3) throw new IOException("Не должно быть более двух операндов");
         //Пробуем перевести римские в арабские, для расчета
-        if (word[0].matches("[a-zA-Z]+")) {
+        if (word[0].matches("[a-zA-Z]+") && isRoman(word[0])) {
             a = romanToArabic(word[0]);
             romanNum1 = true;
         } else {
             a =  Integer.parseInt(word[0]);
         }
-        if (word[2].matches("[a-z-A-Z]+")) {
+        if (word[2].matches("[a-z-A-Z]+") && isRoman(word[2])) {
             b = romanToArabic(word[2]);
             romanNum2 = true;
         } else {
             b = Integer.parseInt(word[2]);
         }
+
         //Если одино цифра арабский а другой римский то выбрасываем исключение
         if ((!romanNum1 && romanNum2) || (romanNum1 && !romanNum2)) {
             throw  new IOException("Все значение должны быть одного типа.");
@@ -65,6 +67,8 @@ public class Main {
                     System.out.println("Деление на ноль");
                 }
                 break;
+            default:
+                throw new ArithmeticException("некорректный математический оператор");
         }
         input = String.valueOf(result);
         input = romanNum1 && romanNum2 ? arabicToRoman(result) : input;
@@ -127,5 +131,9 @@ public class Main {
         }
 
         return sb.toString();
+    }
+    //функция проверяет правильнось написание римских цыфр
+    public static boolean isRoman(String input) {
+        return input.matches("^(M{0,3})(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
     }
 }
